@@ -1,7 +1,12 @@
-// Minimal Claw Code inline diff view
-export function activateClawDiffView(registry?: { registerContribution?: (name: string, details: any) => void }): void {
-  if (registry && typeof registry.registerContribution === 'function') {
-    registry.registerContribution('clawDiffView', { id: 'clawDiffView', version: '0.1.0', name: 'Claw Diff View' });
+// Inline diff view container (P2)
+import { CLAW_DIFF_READY } from "./../common/clawCodeEvents";
+
+export class ClawDiffView {
+  showDiff(diffText: string) {
+    // render placeholder; in real UI this would render inline diff
   }
-  // Placeholder diff view for P0 scaffold
+
+  attachHandlers() {
+    // placeholder to wire up Accept/Reject buttons in real UI
+  }
 }

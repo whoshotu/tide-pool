@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.activateClawDiffView = void 0;
-// Minimal Claw Code inline diff view
-function activateClawDiffView(registry) {
-    if (registry && typeof registry.registerContribution === 'function') {
-        registry.registerContribution('clawDiffView', { id: 'clawDiffView', version: '0.1.0', name: 'Claw Diff View' });
+exports.ClawDiffView = void 0;
+class ClawDiffView {
+    showDiff(diffText) {
+        // render placeholder; in real UI this would render inline diff
     }
-    // Placeholder diff view for P0 scaffold
+    attachHandlers() {
+        // placeholder to wire up Accept/Reject buttons in real UI
+    }
 }
-exports.activateClawDiffView = activateClawDiffView;
+exports.ClawDiffView = ClawDiffView;

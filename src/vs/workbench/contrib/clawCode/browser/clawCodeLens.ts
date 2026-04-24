@@ -1,7 +1,7 @@
-// Minimal Claw Code code lens provider
-export function activateClawCodeLens(registry?: { registerContribution?: (name: string, details: any) => void }): void {
-  if (registry && typeof registry.registerContribution === 'function') {
-    registry.registerContribution('clawCodeLens', { id: 'clawCodeLens', version: '0.1.0', name: 'Claw Code Lens' });
+// Lightweight CodeLens provider scaffold (P2)
+export class ClawCodeLensProvider {
+  provideCodeLenses(document: any, token?: any): any[] {
+    // Minimal no-op lens to satisfy compilation; real lenses would be created here
+    return [];
   }
-  // Placeholder code lens for P0 scaffold
 }

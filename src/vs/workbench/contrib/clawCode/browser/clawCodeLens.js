@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.activateClawCodeLens = void 0;
-// Minimal Claw Code code lens provider
-function activateClawCodeLens(registry) {
-    if (registry && typeof registry.registerContribution === 'function') {
-        registry.registerContribution('clawCodeLens', { id: 'clawCodeLens', version: '0.1.0', name: 'Claw Code Lens' });
+exports.ClawCodeLensProvider = void 0;
+// Lightweight CodeLens provider scaffold (P2)
+class ClawCodeLensProvider {
+    provideCodeLenses(document, token) {
+        // Minimal no-op lens to satisfy compilation; real lenses would be created here
+        return [];
     }
-    // Placeholder code lens for P0 scaffold
 }
-exports.activateClawCodeLens = activateClawCodeLens;
+exports.ClawCodeLensProvider = ClawCodeLensProvider;

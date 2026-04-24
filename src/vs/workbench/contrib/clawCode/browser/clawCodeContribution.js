@@ -1,11 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.activateClawCodeContribution = void 0;
-// Minimal Claw Code browser contribution (frontend)
-function activateClawCodeContribution(registry) {
-    if (registry && typeof registry.registerContribution === 'function') {
-        registry.registerContribution('clawCode', { id: 'clawCode', version: '0.1.0', name: 'Claw Code Core' });
-    }
-    // Activated as part of IDE bootstrap in P0 scaffold
+exports.registerClawCodeContributions = void 0;
+// Registration of Claw Code contributions (P2)
+const clawCodeLens_1 = require("./clawCodeLens");
+const clawChatPanel_1 = require("./clawChatPanel");
+const clawCompletions_1 = require("./clawCompletions");
+// Lightweight registrations for build; actual VSCode extension APIs are not wired here.
+function registerClawCodeContributions(_service) {
+    // Chat panel
+    const chat = new clawChatPanel_1.ClawChatPanel(_service);
+    globalThis.clawCodeChatPanel = chat;
+    // Completions
+    // Proxy provider since there is no real editor integration in this scaffold
+    const completions = new clawCompletions_1.ClawCompletionsProvider(_service);
+    globalThis.clawCodeCompletions = completions;
+    // Diff view
+    globalThis.clawDiffView = {};
+    // CodeLens
+    globalThis.clawCodeLensProvider = new clawCodeLens_1.ClawCodeLensProvider();
 }
-exports.activateClawCodeContribution = activateClawCodeContribution;
+exports.registerClawCodeContributions = registerClawCodeContributions;
