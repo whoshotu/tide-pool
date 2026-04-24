@@ -1,6 +1,14 @@
-// Minimal Clawd Bot browser contribution (OpenClaw)
-export function activateClawdBotContribution(registry?: { registerContribution?: (name: string, details: any) => void }): void {
-  if (registry && typeof registry.registerContribution === 'function') {
-    registry.registerContribution('clawdBot', { id: 'clawdBot', version: '0.1.0', name: 'Clawd Bot' });
-  }
+// Registration of Clawd Bot contributions (P3)
+import { ClawdBotPanel } from './clawdBotPanel';
+import { ClawdBotStatusBar } from './clawdBotStatusBar';
+import { ClawdBotTaskQueue } from './clawdBotTaskQueue';
+
+export function registerClawdBotContributions(_service: any) {
+  const panel = new ClawdBotPanel();
+  const statusBar = new ClawdBotStatusBar(panel);
+  const queue = new ClawdBotTaskQueue(null as any);
+  // Expose globally for debug and potential UI hookup in this scaffold
+  (globalThis as any).clawdBotPanel = panel;
+  (globalThis as any).clawdBotStatusBar = statusBar;
+  (globalThis as any).clawdBotTaskQueue = queue;
 }

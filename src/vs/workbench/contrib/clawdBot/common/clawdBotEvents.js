@@ -1,11 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.clawdBotEvents = void 0;
-// Minimal Clawd Bot events surface
-exports.clawdBotEvents = {
-    CLAMD_TASK_START: 'clawd-task-start',
-    CLAMD_TASK_DONE: 'clawd-task-done',
-    CLAMD_TASK_ERROR: 'clawd-task-error',
-    CLAMD_MEMORY_SAVE: 'clawd-memory-save',
-    CLAMD_MEMORY_LOAD: 'clawd-memory-load',
-};
+exports.CLAWD_TASK_ERROR = exports.CLAWD_MCP_RESULT = exports.CLAWD_MCP_INVOKE = exports.CLAWD_ERROR = exports.CLAWD_DONE = exports.CLAWD_STREAM = void 0;
+// Event name constants for the ClawDBot native agent (P3)
+exports.CLAWD_STREAM = 'clawd-stream';
+exports.CLAWD_DONE = 'clawd-done';
+exports.CLAWD_ERROR = 'clawd-error';
+exports.CLAWD_MCP_INVOKE = 'clawd-mcp-invoke';
+exports.CLAWD_MCP_RESULT = 'clawd-mcp-result';
+exports.CLAWD_TASK_ERROR = 'clawd-task-error';

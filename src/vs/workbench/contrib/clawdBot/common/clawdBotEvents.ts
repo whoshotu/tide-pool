@@ -1,8 +1,7 @@
-// Minimal Clawd Bot events surface
-export const clawdBotEvents = {
-  CLAMD_TASK_START: 'clawd-task-start',
-  CLAMD_TASK_DONE: 'clawd-task-done',
-  CLAMD_TASK_ERROR: 'clawd-task-error',
-  CLAMD_MEMORY_SAVE: 'clawd-memory-save',
-  CLAMD_MEMORY_LOAD: 'clawd-memory-load',
-};
+// Event name constants for the ClawDBot native agent (P3)
+export const CLAWD_STREAM = 'clawd-stream';
+export const CLAWD_DONE = 'clawd-done';
+export const CLAWD_ERROR = 'clawd-error';
+export const CLAWD_MCP_INVOKE = 'clawd-mcp-invoke';
+export const CLAWD_MCP_RESULT = 'clawd-mcp-result';
+export const CLAWD_TASK_ERROR = 'clawd-task-error';
