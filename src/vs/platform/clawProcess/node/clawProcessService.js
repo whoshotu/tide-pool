@@ -86,7 +86,37 @@ class ClawProcessService {
         catch { }
     }
     async getVersion() {
-        return '0.0.0';
+        // Spawn claude --version and capture stdout without shell
+        const cp = require('child_process');
+        return new Promise((resolve, reject) => {
+            try {
+                const child = cp.spawn('claude', ['--version'], { stdio: ['ignore', 'pipe', 'pipe'], shell: false });
+                let output = '';
+                if (child.stdout) {
+                    child.stdout.setEncoding('utf8');
+                    child.stdout.on('data', (chunk) => {
+                        output += chunk;
+                    });
+                }
+                // Optional: capture stderr to help diagnose issues
+                if (child.stderr) {
+                    child.stderr.setEncoding('utf8');
+                    child.stderr.on('data', (chunk) => {
+                        // Append to output for visibility in case claude prints to stderr
+                        output += chunk;
+                    });
+                }
+                child.on('error', (err) => {
+                    reject(err);
+                });
+                child.on('close', (code) => {
+                    resolve(output.trim());
+                });
+            }
+            catch (e) {
+                reject(e);
+            }
+        });
     }
     onStream(sessionId, handler) {
         const s = this.sessions.get(sessionId);

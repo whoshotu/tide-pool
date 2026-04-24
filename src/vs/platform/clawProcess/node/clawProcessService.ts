@@ -79,7 +79,36 @@ export class ClawProcessService implements IClawProcessService {
   }
 
   async getVersion(): Promise<string> {
-    return '0.0.0';
+    // Spawn claude --version and capture stdout without shell
+    const cp = require('child_process');
+    return new Promise<string>((resolve, reject) => {
+      try {
+        const child = cp.spawn('claude', ['--version'], { stdio: ['ignore', 'pipe', 'pipe'], shell: false });
+        let output = '';
+        if (child.stdout) {
+          child.stdout.setEncoding('utf8');
+          child.stdout.on('data', (chunk: string) => {
+            output += chunk;
+          });
+        }
+        // Optional: capture stderr to help diagnose issues
+        if (child.stderr) {
+          child.stderr.setEncoding('utf8');
+          child.stderr.on('data', (chunk: string) => {
+            // Append to output for visibility in case claude prints to stderr
+            output += chunk;
+          });
+        }
+        child.on('error', (err: Error) => {
+          reject(err);
+        });
+        child.on('close', (code: number) => {
+          resolve(output.trim());
+        });
+      } catch (e) {
+        reject(e as any);
+      }
+    });
   }
 
   onStream(sessionId: string, handler: (chunk: string) => void): void {
