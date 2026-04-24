@@ -1,13 +1,21 @@
-// Core interface: IClawProcessService (P0 scaffold, real implementation to come)
+// IClawProcessService: Entry point for controlling the Claude subprocess.
+// Pure TypeScript interface. No CLI or shell interactions here.
 export interface IClawProcessService {
-  // Spawn a subprocess for a given session. Returns a promise resolving to exit code.
-  spawn(sessionId: string, args: string[]): Promise<number>;
-  // Cancel a running subprocess for a given session
+  // Spawn a Claude subprocess for a given session with provided arguments.
+  spawn(sessionId: string, args: string[]): Promise<void>;
+
+  // Cancel/terminate a Claude session by its sessionId.
   cancel(sessionId: string): void;
-  // Retrieve the Claude/Claw binary version
+
+  // Retrieve the Claude binary version string.
   getVersion(): Promise<string>;
-  // Event hookups for streaming output and lifecycle
+
+  // Attach a chunked stdout/stderr stream handler for a session.
   onStream(sessionId: string, handler: (chunk: string) => void): void;
-  onDone(sessionId: string, handler: () => void): void;
+
+  // Attach a handler to be invoked when the Claude process completes.
+  onDone(sessionId: string, handler: (exitCode: number) => void): void;
+
+  // Attach a handler for error events related to a session.
   onError(sessionId: string, handler: (err: Error) => void): void;
 }
